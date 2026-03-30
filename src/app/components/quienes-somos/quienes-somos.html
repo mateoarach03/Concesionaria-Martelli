@@ -1,0 +1,128 @@
+<!-- QUIENES SOMOS SECTION -->
+<section id="quienes-somos" class="about">
+  <div class="container">
+
+    <!-- Section Label -->
+    <div class="about__label-wrap">
+      <span class="about__label">QUIÉNES SOMOS</span>
+    </div>
+
+    <!-- Main Content: Two Columns -->
+    <div class="about__main">
+
+      <!-- Left: Image -->
+      <div class="about__image-col">
+        <div class="about__image-wrapper">
+          <img src="assets/images/slide1.png" alt="Concesionaria Martelli Automotores" class="about__image" />
+          <div class="about__image-badge">
+            <span class="about__image-badge-num">+18</span>
+            <span class="about__image-badge-text">años de<br>experiencia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text -->
+      <div class="about__text-col">
+        <h2 class="section-title">
+          Somos <span>Martelli</span><br />Automotores
+        </h2>
+        <div class="divider"></div>
+        <p class="about__paragraph">
+          Desde el año 2005, somos una concesionaria familiar ubicada en el corazón de la ciudad,
+          especializada en la compra y venta de vehículos usados de todas las marcas.
+        </p>
+        <p class="about__paragraph">
+          Nuestro objetivo es brindarte la mejor experiencia al momento de adquirir tu próximo vehículo.
+          Trabajamos con total transparencia, ofreciendo vehículos revisados, documentación en regla
+          y las mejores opciones de financiación del mercado.
+        </p>
+        <p class="about__paragraph">
+          Aceptamos tu vehículo como parte de pago y gestionamos todos los trámites de transferencia
+          sin que vos tengas que preocuparte por nada.
+        </p>
+
+        <div class="about__actions">
+          <a [href]="getWhatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-primary"
+            id="about-whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            Consultá Ahora
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values Cards -->
+    <div class="about__values">
+      @for (valor of valores; track valor.titulo) {
+      <div class="about__value-card">
+        <div class="about__value-icon">
+          <i [class]="valor.icon"></i>
+        </div>
+        <h3 class="about__value-title">{{ valor.titulo }}</h3>
+        <p class="about__value-text">{{ valor.texto }}</p>
+      </div>
+      }
+    </div>
+
+    <!-- Location Section -->
+    <div class="about__location">
+      <div class="about__location-header">
+        <h2 class="section-title">Nuestra <span>Ubicación</span></h2>
+        <div class="divider"></div>
+        <p class="section-subtitle">
+          Visitanos en nuestro local. Atención de Lunes a Viernes de 9:00 a 12:30 hs y de 15:30 a 19:30 hs y Sabados de
+          9:30 a 12:30 hs.
+        </p>
+      </div>
+
+      <div class="about__location-content">
+        <!-- Map Iframe -->
+        <div class="about__map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6692.449491994387!2d-60.67476162350819!3d-32.99784972796755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7add2a7d8a0b7%3A0x433c679eda7e371a!2sMartelli%20e%20Hijos!5e0!3m2!1ses-419!2sar!4v1774825448529!5m2!1ses-419!2sar"
+            width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <!-- Location Info -->
+        <div class="about__location-info">
+          <div class="about__info-item">
+            <div class="about__info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <p class="about__info-label">Dirección</p>
+              <p class="about__info-value">Av. Ovidio Lagos 5210, Rosario</p>
+            </div>
+          </div>
+          <div class="about__info-item">
+            <div class="about__info-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <p class="about__info-label">Teléfono</p>
+              <p class="about__info-value">+54 341 271-8312</p>
+            </div>
+          </div>
+          <div class="about__info-item">
+            <div class="about__info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <p class="about__info-label">Email</p>
+              <p class="about__info-value">info&#64;martelliautomotores.com</p>
+            </div>
+          </div>
+
+          <a [href]="getWhatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-primary about__wa-btn"
+            id="location-whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            Escribinos por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

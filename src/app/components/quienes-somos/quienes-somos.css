@@ -1,0 +1,332 @@
+/* ============================
+   QUIÉNES SOMOS STYLES
+   ============================ */
+
+.about {
+  padding: 130px 0 90px;
+  background: var(--color-black);
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+.about__label-wrap {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.about__label-wrap::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+
+.about__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--color-red);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Main Two-Column Layout */
+.about__main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+/* Image Column */
+.about__image-col {
+  position: relative;
+}
+
+.about__image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.about__image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 1;
+}
+
+.about__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.about__image-wrapper:hover .about__image {
+  transform: scale(1.04);
+}
+
+.about__image-badge {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  z-index: 10;
+  width: 110px;
+  height: 110px;
+  background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-red);
+  text-align: center;
+}
+
+.about__image-badge-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: white;
+}
+
+.about__image-badge-text {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.3;
+}
+
+/* Text Column */
+.about__text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about__paragraph {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.about__actions {
+  margin-top: 28px;
+}
+
+/* Values Grid */
+.about__values {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 90px;
+}
+
+.about__value-card {
+  background: var(--color-dark-2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 28px 22px;
+  text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.about__value-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-red), var(--color-red-dark));
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+}
+
+.about__value-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(224, 32, 32, 0.3);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.about__value-card:hover::before {
+  transform: scaleX(1);
+}
+
+.about__value-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(224, 32, 32, 0.1);
+  border: 1px solid rgba(224, 32, 32, 0.25);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--color-red);
+  margin: 0 auto 18px;
+  transition: all var(--transition-normal);
+}
+
+.about__value-card:hover .about__value-icon {
+  background: var(--color-red);
+  color: white;
+  box-shadow: var(--shadow-red);
+}
+
+.about__value-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+.about__value-text {
+  font-size: 0.82rem;
+  color: var(--color-gray);
+  line-height: 1.65;
+}
+
+/* Location Section */
+.about__location-header {
+  margin-bottom: 40px;
+}
+
+.about__location-content {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.about__map-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 380px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.about__map {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(20%) contrast(1.1);
+}
+
+/* Location Info */
+.about__location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__info-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--color-dark-2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  transition: border-color var(--transition-fast);
+}
+
+.about__info-item:hover {
+  border-color: rgba(224, 32, 32, 0.25);
+}
+
+.about__info-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(224, 32, 32, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--color-red);
+  flex-shrink: 0;
+}
+
+.about__info-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-bottom: 3px;
+}
+
+.about__info-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.about__wa-btn {
+  margin-top: auto;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .about__values {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about__main {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__image-badge {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .about__values {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .about__location-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about__map-wrapper {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about__values {
+    grid-template-columns: 1fr;
+  }
+}

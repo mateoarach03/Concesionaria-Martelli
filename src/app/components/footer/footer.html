@@ -1,0 +1,101 @@
+<!-- FOOTER COMPONENT -->
+<footer class="footer">
+  <!-- Top Wave Separator -->
+  <div class="footer__top">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Brand Column -->
+        <div class="footer__col footer__col--brand">
+          <div class="footer__logo">
+            <div class="footer__logo-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <div class="footer__logo-text">
+              <span class="footer__logo-brand">MARTELLI</span>
+              <span class="footer__logo-sub">AUTOMOTORES</span>
+            </div>
+          </div>
+          <p class="footer__brand-text">
+            Tu concesionaria de confianza desde 2005.
+            Comprometidos con brindarte la mejor experiencia en la compra de tu vehículo.
+          </p>
+          <div class="footer__social">
+            <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer"
+              class="footer__social-btn footer__social-btn--wa" title="WhatsApp" id="footer-wa-btn">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer"
+              class="footer__social-btn footer__social-btn--ig" title="Instagram" id="footer-ig-btn">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a [href]="googleMapsUrl" target="_blank" rel="noopener noreferrer"
+              class="footer__social-btn footer__social-btn--map" title="Ubicación" id="footer-map-btn">
+              <i class="fas fa-map-marker-alt"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation Column -->
+        <div class="footer__col">
+          <h3 class="footer__col-title">Navegación</h3>
+          <ul class="footer__nav-list">
+            <li>
+              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="button" tabindex="0">
+                <i class="fas fa-chevron-right"></i> Inicio
+              </a>
+            </li>
+            <li>
+              <a routerLink="/vehiculos" routerLinkActive="active" role="button" tabindex="0">
+                <i class="fas fa-chevron-right"></i> Vehículos
+              </a>
+            </li>
+            <li>
+              <a routerLink="/quienes-somos" routerLinkActive="active" role="button" tabindex="0">
+                <i class="fas fa-chevron-right"></i> Quiénes Somos
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer__col">
+          <h3 class="footer__col-title">Contacto</h3>
+          <ul class="footer__contact-list">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Av. Ovidio Lagos 5210, Rosario, Argentina</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>+54 341 271-8312</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info&#64;martelliautomotores.com</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>Lun - Sáb: 9:00 a 18:00 hs</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="footer__bottom-inner">
+        <p class="footer__copyright">
+          © {{ currentYear }} Martelli Automotores. Todos los derechos reservados.
+        </p>
+        <p class="footer__credits">
+          Diseñado con <i class="fas fa-heart"></i> para nuestros clientes
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

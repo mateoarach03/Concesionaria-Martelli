@@ -1,0 +1,141 @@
+<!-- HOME / HERO SECTION WITH CAROUSEL -->
+<section id="inicio" class="hero">
+
+  <!-- Carousel Slides -->
+  <div class="hero__carousel">
+    @for (slide of slides; track slide.id; let i = $index) {
+      <div class="hero__slide" [class.active]="i === currentSlide">
+        <div class="hero__slide-bg" [style.backgroundImage]="'url(' + slide.image + ')'"></div>
+        <div class="hero__overlay"></div>
+        <div class="hero__content" [class.content-active]="i === currentSlide">
+          <div class="container">
+            <div class="hero__badge">
+              <i class="fas fa-shield-alt"></i>
+              <span>Concesionaria de confianza desde 2005</span>
+            </div>
+            <h1 class="hero__title">
+              {{ slide.title }}<br />
+              <span class="hero__title-highlight">{{ slide.titleHighlight }}</span>
+            </h1>
+            <p class="hero__description">{{ slide.description }}</p>
+            <div class="hero__buttons">
+              <a class="btn-primary" [routerLink]="'/' + slide.buttonTarget" id="hero-btn-{{slide.id}}">
+                {{ slide.buttonText }}
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a class="btn-secondary" routerLink="/quienes-somos" id="hero-about-btn-{{slide.id}}">
+                <i class="fas fa-info-circle"></i>
+                Conócenos
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="hero__arrow hero__arrow--prev" (click)="prevSlide()" aria-label="Anterior" id="hero-prev-btn">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <button class="hero__arrow hero__arrow--next" (click)="nextSlide()" aria-label="Siguiente" id="hero-next-btn">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+  <!-- Dot Indicators -->
+  <div class="hero__dots">
+    @for (slide of slides; track slide.id; let i = $index) {
+      <button class="hero__dot" [class.active]="i === currentSlide"
+              (click)="goToSlide(i)" [attr.aria-label]="'Ir al slide ' + (i + 1)"
+              [id]="'hero-dot-' + (i + 1)">
+      </button>
+    }
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="hero__scroll-hint" routerLink="/vehiculos">
+    <span>Explorar</span>
+    <div class="hero__scroll-arrow">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </div>
+
+</section>
+
+<!-- VEHÍCULOS DESTACADOS SECTION -->
+<section id="destacados" class="destacados">
+  <div class="container">
+    <div class="section-header">
+      <p class="destacados__label">NUESTRA SELECCIÓN</p>
+      <h2 class="section-title">Vehículos <span>Destacados</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">
+        Conocé los modelos más recomendados de nuestro stock. Calidad garantizada.
+      </p>
+    </div>
+
+    <!-- Vehicle Grid -->
+    <div class="vehiculos__grid">
+      @for (auto of featuredVehicles(); track auto.id) {
+        <article class="vehicle-card vehicle-card--featured" id="home-vehicle-{{auto.id}}">
+          <div class="vehicle-card__badge">
+            <i class="fas fa-star"></i> Destacado
+          </div>
+
+          <div class="vehicle-card__image-wrapper">
+            <img [src]="auto.image" [alt]="auto.marca + ' ' + auto.modelo" class="vehicle-card__image" loading="lazy" />
+            <div class="vehicle-card__image-overlay">
+              <a [href]="getWhatsappUrl(auto)" target="_blank" rel="noopener noreferrer"
+                 class="vehicle-card__quick-wa" [id]="'home-vehicle-wa-' + auto.id">
+                <i class="fab fa-whatsapp"></i>
+                Consultar
+              </a>
+            </div>
+          </div>
+
+          <div class="vehicle-card__body">
+            <div class="vehicle-card__header">
+              <div>
+                <p class="vehicle-card__brand">{{ auto.marca }}</p>
+                <h3 class="vehicle-card__model">{{ auto.modelo }}</h3>
+              </div>
+              <span class="vehicle-card__year">{{ auto.year }}</span>
+            </div>
+
+            <div class="vehicle-card__specs">
+              <span class="vehicle-card__spec">
+                <i class="fas fa-tachometer-alt"></i> {{ auto.km }} km
+              </span>
+              <span class="vehicle-card__spec">
+                <i class="fas fa-gas-pump"></i> {{ auto.combustible }}
+              </span>
+              <span class="vehicle-card__spec">
+                <i class="fas fa-cog"></i> {{ auto.transmision }}
+              </span>
+            </div>
+
+            <div class="vehicle-card__footer">
+              <div class="vehicle-card__price-group">
+                <span class="vehicle-card__price-label">Precio</span>
+                <span class="vehicle-card__price">{{ auto.precio }}</span>
+              </div>
+              <a [href]="getWhatsappUrl(auto)" target="_blank" rel="noopener noreferrer"
+                 class="vehicle-card__btn" [id]="'home-vehicle-detail-' + auto.id">
+                Ver Detalle
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+    
+    <div class="destacados__actions">
+      <a routerLink="/vehiculos" class="btn-primary dest-btn">
+        Ver Catálogo Completo
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
