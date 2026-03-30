@@ -1,0 +1,183 @@
+<div class="admin-container">
+  <!-- Header -->
+  <div class="admin-header">
+    <div class="header-left">
+      <h1>Panel de Administración</h1>
+      <p *ngIf="currentUser()" class="user-info">Admin: {{ currentUser()?.email }}</p>
+    </div>
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </div>
+
+  <!-- Mensajes de éxito/error -->
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="error()" class="error-message">{{ error() }}</div>
+
+  <!-- MODO: Lista de Vehículos -->
+  <div *ngIf="formMode === 'list'" class="vehicles-section">
+    <div class="section-header">
+      <h2>Gestión de Vehículos</h2>
+      <button class="btn btn-primary" (click)="showCreateForm()">+ Nuevo Vehículo</button>
+    </div>
+
+    <!-- Cargando -->
+    <div *ngIf="isLoading()" class="loading">Cargando vehículos...</div>
+
+    <!-- Tabla de vehículos -->
+    <div *ngIf="!isLoading() && vehicles().length > 0" class="vehicles-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Destacado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehicle of vehicles()">
+            <td>{{ vehicle.marca }}</td>
+            <td>{{ vehicle.modelo }}</td>
+            <td>{{ vehicle.year }}</td>
+            <td>{{ vehicle.precio }}</td>
+            <td>{{ vehicle.stock || 0 }}</td>
+            <td>
+              <span class="badge" [class.badge-destacado]="vehicle.destacado" [class.badge-normal]="!vehicle.destacado">
+                {{ vehicle.destacado ? '⭐ Sí' : 'No' }}
+              </span>
+            </td>
+            <td class="actions">
+              <button class="btn btn-sm btn-edit" (click)="showEditForm(vehicle)">Editar</button>
+              <button class="btn btn-sm btn-delete" (click)="deleteVehicle(vehicle.id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sin vehículos -->
+    <div *ngIf="!isLoading() && vehicles().length === 0" class="no-vehicles">
+      <p>No hay vehículos. Crea el primero haciendo clic en "+ Nuevo Vehículo"</p>
+    </div>
+  </div>
+
+  <!-- MODO: Formulario Crear/Editar -->
+  <div *ngIf="formMode !== 'list'" class="form-section">
+    <h2>{{ formMode === 'create' ? 'Crear Nuevo Vehículo' : 'Editar Vehículo' }}</h2>
+
+    <form [formGroup]="vehicleForm" (ngSubmit)="submitForm()">
+
+      <!-- Fila 1: Marca / Modelo -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="marca">Marca *</label>
+          <input type="text" id="marca" formControlName="marca" placeholder="Toyota, Honda, etc." />
+          <span *ngIf="vehicleForm.get('marca')?.invalid && vehicleForm.get('marca')?.touched" class="error">
+            Campo requerido
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="modelo">Modelo *</label>
+          <input type="text" id="modelo" formControlName="modelo" placeholder="Corolla, Civic, etc." />
+          <span *ngIf="vehicleForm.get('modelo')?.invalid && vehicleForm.get('modelo')?.touched" class="error">
+            Campo requerido
+          </span>
+        </div>
+      </div>
+
+      <!-- Fila 2: Año / Precio -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="year">Año *</label>
+          <input type="number" id="year" formControlName="year" placeholder="2024" min="1900" max="2100" />
+          <span *ngIf="vehicleForm.get('year')?.invalid && vehicleForm.get('year')?.touched" class="error">
+            Año inválido
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="precio">Precio *</label>
+          <input type="number" id="precio" formControlName="precio" placeholder="25000" step="0.01" min="0" />
+          <span *ngIf="vehicleForm.get('precio')?.invalid && vehicleForm.get('precio')?.touched" class="error">
+            Precio inválido
+          </span>
+        </div>
+      </div>
+
+      <!-- Fila 3: Kilometraje / Stock -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="km">Kilometraje</label>
+          <input type="text" id="km" formControlName="km" placeholder="32.000 km" />
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock *</label>
+          <input type="number" id="stock" formControlName="stock" placeholder="1" min="0" />
+          <span *ngIf="vehicleForm.get('stock')?.invalid && vehicleForm.get('stock')?.touched" class="error">
+            Stock inválido
+          </span>
+        </div>
+      </div>
+
+      <!-- Fila 4: Combustible / Transmisión -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="combustible">Combustible</label>
+          <select id="combustible" formControlName="combustible">
+            <option value="">-- Seleccionar --</option>
+            <option value="Nafta">Nafta</option>
+            <option value="Diesel">Diesel</option>
+            <option value="GNC">GNC</option>
+            <option value="Híbrido">Híbrido</option>
+            <option value="Eléctrico">Eléctrico</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="transmision">Transmisión</label>
+          <select id="transmision" formControlName="transmision">
+            <option value="">-- Seleccionar --</option>
+            <option value="Manual">Manual</option>
+            <option value="Automática">Automática</option>
+            <option value="CVT">CVT</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Fila 5: Imágenes / Destacado -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="image">URLs de Imágenes (separadas por coma)</label>
+          <input type="text" id="image" formControlName="image" placeholder="url1.jpg, url2.jpg" />
+        </div>
+
+        <div class="form-group form-group-destacado">
+          <label>Vehículo Destacado</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="destacado" formControlName="destacado" />
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">{{ vehicleForm.get('destacado')?.value ? '⭐ Aparece en destacados' : 'No destacado' }}</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div class="form-group full-width">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" rows="4" placeholder="Describe el vehículo..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="vehicleForm.invalid || isLoading()">
+          {{ isLoading() ? 'Guardando...' : (formMode === 'create' ? 'Crear Vehículo' : 'Actualizar Vehículo') }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

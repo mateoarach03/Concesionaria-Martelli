@@ -4,7 +4,7 @@
 
 .footer {
   background: var(--color-dark);
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .footer__top {
@@ -25,37 +25,10 @@
   margin-bottom: 20px;
 }
 
-.footer__logo-icon {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  color: white;
-}
-
-.footer__logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-
-.footer__logo-brand {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  letter-spacing: 3px;
-  color: var(--color-white);
-}
-
-.footer__logo-sub {
-  font-size: 0.58rem;
-  letter-spacing: 2.5px;
-  color: var(--color-gray);
-  text-transform: uppercase;
-  margin-top: 2px;
+.footer__logo-img {
+  width: 260px;
+  max-height: 100px;
+  object-fit: contain;
 }
 
 .footer__brand-text {
@@ -88,6 +61,7 @@
   color: #25D366;
   border: 1px solid rgba(37, 211, 102, 0.25);
 }
+
 .footer__social-btn--wa:hover {
   background: #25D366;
   color: white;
@@ -100,6 +74,7 @@
   color: #dc2743;
   border: 1px solid rgba(220, 39, 67, 0.25);
 }
+
 .footer__social-btn--ig:hover {
   background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
   color: white;
@@ -109,10 +84,11 @@
 }
 
 .footer__social-btn--map {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--color-gray);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .footer__social-btn--map:hover {
   background: var(--color-red);
   color: white;
@@ -203,7 +179,7 @@
 
 /* Bottom Bar */
 .footer__bottom {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 20px 0;
 }
 

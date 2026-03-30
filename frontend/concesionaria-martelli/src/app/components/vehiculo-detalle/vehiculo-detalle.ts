@@ -22,10 +22,10 @@ export class VehiculoDetalleComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
       if (idParam) {
-        const id = parseInt(idParam, 10);
-        this.vehicle = this.vehicleService.getVehicleById(id);
+        // En Supabase el ID es un UUID (string), en el mock puede ser number
+        this.vehicle = this.vehicleService.getVehicleById(idParam);
         if (this.vehicle) {
-          this.mainImage = this.vehicle.image;
+          this.mainImage = this.vehicle.image || (this.vehicle.images && this.vehicle.images.length > 0 ? this.vehicle.images[0] : '');
         }
       }
     });

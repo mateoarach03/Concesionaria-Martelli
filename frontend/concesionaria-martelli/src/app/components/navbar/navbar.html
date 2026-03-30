@@ -4,20 +4,15 @@
 
     <!-- Logo -->
     <a class="navbar__logo" routerLink="/" (click)="closeMobileMenu()" role="button" tabindex="0">
-      <div class="navbar__logo-icon">
-        <i class="fas fa-car"></i>
-      </div>
-      <div class="navbar__logo-text">
-        <span class="navbar__logo-brand">MARTELLI</span>
-        <span class="navbar__logo-sub">AUTOMOTORES</span>
-      </div>
+      <img src="assets/images/martelliLOGO.png" alt="Martelli e Hijos" class="navbar__logo-img">
     </a>
 
     <!-- Desktop Nav Links -->
     <nav class="navbar__nav" aria-label="Navegación principal">
       <ul class="navbar__nav-list">
         <li>
-          <a class="navbar__nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="button" tabindex="0">
+          <a class="navbar__nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            role="button" tabindex="0">
             Inicio
           </a>
         </li>
@@ -36,24 +31,21 @@
 
     <!-- Action Buttons -->
     <div class="navbar__actions">
-      <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer"
-         class="navbar__btn navbar__btn--whatsapp" title="Contactar por WhatsApp" id="navbar-whatsapp-btn">
-        <i class="fab fa-whatsapp"></i>
-        <span>WhatsApp</span>
-      </a>
-      <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer"
-         class="navbar__btn navbar__btn--instagram" title="Seguinos en Instagram" id="navbar-instagram-btn">
+      <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer" class="navbar__btn navbar__btn--instagram"
+        title="Seguinos en Instagram" id="navbar-instagram-btn">
         <i class="fab fa-instagram"></i>
+        <span>Instagram</span>
       </a>
-      <a [href]="googleMapsUrl" target="_blank" rel="noopener noreferrer"
-         class="navbar__btn navbar__btn--location" title="Ver ubicación en Google Maps" id="navbar-location-btn">
+      <a [href]="googleMapsUrl" target="_blank" rel="noopener noreferrer" class="navbar__btn navbar__btn--location"
+        title="Ver ubicación en Google Maps" id="navbar-location-btn">
         <i class="fas fa-map-marker-alt"></i>
+        <span>Ubicación</span>
       </a>
     </div>
 
     <!-- Mobile Hamburger -->
-    <button class="navbar__hamburger" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen" 
-            aria-label="Abrir menú" id="navbar-hamburger-btn">
+    <button class="navbar__hamburger" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen"
+      aria-label="Abrir menú" id="navbar-hamburger-btn">
       <span></span>
       <span></span>
       <span></span>
@@ -65,12 +57,14 @@
     <nav>
       <ul class="navbar__mobile-list">
         <li>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()" role="button" tabindex="0">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            (click)="closeMobileMenu()" role="button" tabindex="0">
             <i class="fas fa-home"></i> Inicio
           </a>
         </li>
         <li>
-          <a routerLink="/quienes-somos" routerLinkActive="active" (click)="closeMobileMenu()" role="button" tabindex="0">
+          <a routerLink="/quienes-somos" routerLinkActive="active" (click)="closeMobileMenu()" role="button"
+            tabindex="0">
             <i class="fas fa-users"></i> Quiénes Somos
           </a>
         </li>
@@ -81,13 +75,16 @@
         </li>
       </ul>
       <div class="navbar__mobile-actions">
-        <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" class="navbar__mobile-btn navbar__mobile-btn--wa">
+        <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer"
+          class="navbar__mobile-btn navbar__mobile-btn--wa">
           <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
-        <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer" class="navbar__mobile-btn navbar__mobile-btn--ig">
+        <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer"
+          class="navbar__mobile-btn navbar__mobile-btn--ig">
           <i class="fab fa-instagram"></i> Instagram
         </a>
-        <a [href]="googleMapsUrl" target="_blank" rel="noopener noreferrer" class="navbar__mobile-btn navbar__mobile-btn--map">
+        <a [href]="googleMapsUrl" target="_blank" rel="noopener noreferrer"
+          class="navbar__mobile-btn navbar__mobile-btn--map">
           <i class="fas fa-map-marker-alt"></i> Ubicación
         </a>
       </div>

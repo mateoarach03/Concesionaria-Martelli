@@ -8,32 +8,12 @@
         <!-- Brand Column -->
         <div class="footer__col footer__col--brand">
           <div class="footer__logo">
-            <div class="footer__logo-icon">
-              <i class="fas fa-car"></i>
-            </div>
-            <div class="footer__logo-text">
-              <span class="footer__logo-brand">MARTELLI</span>
-              <span class="footer__logo-sub">AUTOMOTORES</span>
-            </div>
+            <img src="assets/images/martelliLOGO.png" alt="Martelli e Hijos" class="footer__logo-img">
           </div>
           <p class="footer__brand-text">
             Tu concesionaria de confianza desde 2005.
             Comprometidos con brindarte la mejor experiencia en la compra de tu vehículo.
           </p>
-          <div class="footer__social">
-            <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer"
-              class="footer__social-btn footer__social-btn--wa" title="WhatsApp" id="footer-wa-btn">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-            <a [href]="instagramUrl" target="_blank" rel="noopener noreferrer"
-              class="footer__social-btn footer__social-btn--ig" title="Instagram" id="footer-ig-btn">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a [href]="googleMapsUrl" target="_blank" rel="noopener noreferrer"
-              class="footer__social-btn footer__social-btn--map" title="Ubicación" id="footer-map-btn">
-              <i class="fas fa-map-marker-alt"></i>
-            </a>
-          </div>
         </div>
 
         <!-- Navigation Column -->
@@ -41,7 +21,8 @@
           <h3 class="footer__col-title">Navegación</h3>
           <ul class="footer__nav-list">
             <li>
-              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="button" tabindex="0">
+              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="button"
+                tabindex="0">
                 <i class="fas fa-chevron-right"></i> Inicio
               </a>
             </li>

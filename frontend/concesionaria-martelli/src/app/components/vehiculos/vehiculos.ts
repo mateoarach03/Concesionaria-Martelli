@@ -26,7 +26,7 @@ export class VehiculosComponent {
   // Opciones únicas generadas dinámicamente desde los datos
   get marcasDisponibles(): string[] {
     const vehiculos = this.vehicleService.allVehicles();
-    return [...new Set(vehiculos.map(v => v.marca))].sort();
+    return [...new Set(vehiculos.map(v => v.marca).filter(m => !!m))].sort();
   }
 
   get modelosDisponibles(): string[] {
@@ -34,12 +34,12 @@ export class VehiculosComponent {
     const base = this.filtroMarca
       ? vehiculos.filter(v => v.marca === this.filtroMarca)
       : vehiculos;
-    return [...new Set(base.map(v => v.modelo))].sort();
+    return [...new Set(base.map(v => v.modelo).filter(m => !!m))].sort();
   }
 
   get transmisionesDisponibles(): string[] {
     const vehiculos = this.vehicleService.allVehicles();
-    return [...new Set(vehiculos.map(v => v.transmision))].sort();
+    return [...new Set(vehiculos.map(v => v.transmision).filter(t => !!t))].sort() as string[];
   }
 
   // Listado filtrado
@@ -49,6 +49,7 @@ export class VehiculosComponent {
 
     return vehiculos.filter(v => {
       const matchTexto = !txt || [v.marca, v.modelo, v.combustible, v.transmision, String(v.year)]
+        .filter((campo): campo is string => !!campo)
         .some(campo => campo.toLowerCase().includes(txt));
 
       const matchMarca = !this.filtroMarca || v.marca === this.filtroMarca;
