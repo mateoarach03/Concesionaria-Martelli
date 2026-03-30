@@ -1,0 +1,98 @@
+<section class="vehiculo-detalle">
+  <div class="container">
+    @if (vehicle) {
+      <!-- Breadcrumb / Back Button -->
+      <div class="vehiculo-detalle__header">
+        <a routerLink="/vehiculos" class="btn-back">
+          <i class="fas fa-arrow-left"></i> Volver a Vehículos
+        </a>
+      </div>
+
+      <div class="vehiculo-detalle__content">
+        <!-- Image Gallery -->
+        <div class="vehiculo-detalle__gallery">
+          <div class="vehiculo-detalle__main-image">
+            <img [src]="mainImage" [alt]="vehicle.marca + ' ' + vehicle.modelo" class="img-fluid" />
+          </div>
+          
+          @if (vehicle.images && vehicle.images.length > 0) {
+            <div class="vehiculo-detalle__thumbnails">
+              @for (img of vehicle.images; track img) {
+                <img 
+                  [src]="img" 
+                  [alt]="vehicle.marca + ' ' + vehicle.modelo" 
+                  class="img-thumbnail" 
+                  [class.active]="mainImage === img"
+                  (click)="setMainImage(img)" />
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Vehicle Info -->
+        <div class="vehiculo-detalle__info">
+          <!-- Title & Price -->
+          <div class="vehiculo-detalle__title-wrapper">
+            <h1 class="vehiculo-detalle__title">{{ vehicle.marca }} {{ vehicle.modelo }}</h1>
+            <p class="vehiculo-detalle__year">{{ vehicle.year }}</p>
+          </div>
+          
+          <div class="vehiculo-detalle__price-wrapper">
+            <h2 class="vehiculo-detalle__price">{{ vehicle.precio }}</h2>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Specs Grid -->
+          <h3 class="vehiculo-detalle__section-title">Especificaciones</h3>
+          <div class="vehiculo-detalle__specs-grid">
+            <div class="spec-item">
+              <i class="fas fa-tachometer-alt"></i>
+              <div class="spec-text">
+                <span class="spec-label">Kilometraje</span>
+                <span class="spec-value">{{ vehicle.km }} km</span>
+              </div>
+            </div>
+            <div class="spec-item">
+              <i class="fas fa-gas-pump"></i>
+              <div class="spec-text">
+                <span class="spec-label">Combustible</span>
+                <span class="spec-value">{{ vehicle.combustible }}</span>
+              </div>
+            </div>
+            <div class="spec-item">
+              <i class="fas fa-cog"></i>
+              <div class="spec-text">
+                <span class="spec-label">Transmisión</span>
+                <span class="spec-value">{{ vehicle.transmision }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          @if (vehicle.descripcion) {
+            <h3 class="vehiculo-detalle__section-title">Descripción</h3>
+            <p class="vehiculo-detalle__description">
+              {{ vehicle.descripcion }}
+            </p>
+          }
+
+          <!-- Action Buttons -->
+          <div class="vehiculo-detalle__actions">
+            <a [href]="getWhatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-primary w-100 text-center d-block">
+              <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <!-- Not Found State -->
+      <div class="vehiculo-detalle__not-found">
+        <i class="fas fa-car-crash vehiculo-detalle__not-found-icon"></i>
+        <h2>Vehículo no encontrado</h2>
+        <p>El vehículo que estás buscando no existe o ya fue vendido.</p>
+        <a routerLink="/vehiculos" class="btn-primary">Ver todos los vehículos</a>
+      </div>
+    }
+  </div>
+</section>
