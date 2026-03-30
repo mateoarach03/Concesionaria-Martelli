@@ -36,21 +36,21 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "frontend/concesionaria-martelli/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "src/main.ts",
+            "browser": "frontend/concesionaria-martelli/src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "frontend/concesionaria-martelli/public"
               }
             ],
-            "styles": ["src/styles.css"]
+            "styles": ["frontend/concesionaria-martelli/src/styles.css"]
           },
           "configurations": {
             "production": {

@@ -6,5 +6,5 @@
     "outDir": "./out-tsc/spec",
     "types": ["vitest/globals"]
   },
-  "include": ["src/**/*.d.ts", "src/**/*.spec.ts"]
+  "include": ["frontend/concesionaria-martelli/src/**/*.d.ts", "frontend/concesionaria-martelli/src/**/*.spec.ts"]
 }

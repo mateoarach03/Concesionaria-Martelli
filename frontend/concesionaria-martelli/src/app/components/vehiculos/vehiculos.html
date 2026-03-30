@@ -143,7 +143,7 @@
                 <span class="vehicle-card__price-label">Precio</span>
                 <span class="vehicle-card__price">{{ auto.precio }}</span>
               </div>
-              <a [href]="getWhatsappUrl(auto)" target="_blank" rel="noopener noreferrer"
+              <a [routerLink]="['/vehiculos', auto.id]" 
                  class="vehicle-card__btn" [id]="'vehicle-detail-' + auto.id">
                 Ver Detalle
                 <i class="fas fa-arrow-right"></i>
