@@ -178,4 +178,39 @@ export class VehicleService {
   async refreshVehicles(): Promise<void> {
     await this.loadVehiclesFromSupabase();
   }
+
+  // Subir imagen a Supabase Storage
+  async uploadImage(file: File): Promise<{ url: string | null; error: any }> {
+    try {
+      this.loadingSignal.set(true);
+
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { data, error } = await this.supabase
+        .storage
+        .from('vehicles') 
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) throw error;
+
+      // Generar URL pública
+      const { data: publicUrlData } = this.supabase
+        .storage
+        .from('vehicles')
+        .getPublicUrl(filePath);
+
+      return { url: publicUrlData.publicUrl, error: null };
+    } catch (err: any) {
+      const errorMsg = err?.message || 'Error al subir la imagen';
+      this.errorSignal.set(errorMsg);
+      return { url: null, error: errorMsg };
+    } finally {
+      this.loadingSignal.set(false);
+    }
+  }
 }

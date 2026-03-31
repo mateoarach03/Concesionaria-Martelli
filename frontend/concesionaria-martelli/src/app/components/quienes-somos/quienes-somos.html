@@ -10,13 +10,26 @@
     <!-- Main Content: Two Columns -->
     <div class="about__main">
 
-      <!-- Left: Image -->
+      <!-- Left: Image Carousel -->
       <div class="about__image-col">
-        <div class="about__image-wrapper">
-          <img src="assets/images/slide1.png" alt="Concesionaria Martelli Automotores" class="about__image" />
-          <div class="about__image-badge">
-            <span class="about__image-badge-num">+18</span>
-            <span class="about__image-badge-text">años de<br>experiencia</span>
+        <div class="about__image-wrapper about__carousel">
+          @for (img of slideImages; track img; let i = $index) {
+            <img [src]="img" alt="Concesionaria Martelli Automotores" class="about__image about__carousel-slide" [class.active]="i === currentSlide" />
+          }
+          
+          <!-- Navigation Arrows -->
+          <button class="about__carousel-arrow about__carousel-arrow--prev" (click)="prevSlide()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="about__carousel-arrow about__carousel-arrow--next" (click)="nextSlide()">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <!-- Dot Indicators -->
+          <div class="about__carousel-dots">
+            @for (img of slideImages; track img; let i = $index) {
+              <button class="about__carousel-dot" [class.active]="i === currentSlide" (click)="goToSlide(i)"></button>
+            }
           </div>
         </div>
       </div>

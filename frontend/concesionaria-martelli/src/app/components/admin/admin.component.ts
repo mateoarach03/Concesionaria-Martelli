@@ -32,6 +32,10 @@ export class AdminComponent {
   // Formulario
   vehicleForm: FormGroup;
 
+  // Manejo de múltiples imágenes
+  existingImages: string[] = [];
+  newFiles: { file: File, preview: string | ArrayBuffer }[] = [];
+
   // Error/Success messages
   successMessage: string = '';
   errorMessage: string = '';
@@ -59,6 +63,8 @@ export class AdminComponent {
     this.editingId = null;
     this.successMessage = '';
     this.errorMessage = '';
+    this.existingImages = [];
+    this.newFiles = [];
   }
 
   // Mostrar formulario para editar
@@ -73,7 +79,6 @@ export class AdminComponent {
         ? parseFloat(vehicle.precio.replace(/[^\d.-]/g, ''))
         : vehicle.precio,
       descripcion: vehicle.descripcion || '',
-      image: vehicle.images ? vehicle.images.join(', ') : (vehicle.image || vehicle.imagen_url || ''),
       stock: vehicle.stock || 1,
       km: vehicle.km || '',
       combustible: vehicle.combustible || '',
@@ -82,6 +87,17 @@ export class AdminComponent {
     });
     this.successMessage = '';
     this.errorMessage = '';
+    this.newFiles = [];
+    this.existingImages = [];
+    
+    // Cargar imágenes existentes
+    if (vehicle.images && vehicle.images.length > 0) {
+      this.existingImages = [...vehicle.images];
+    } else if (vehicle.image) {
+      this.existingImages = [vehicle.image];
+    } else if (vehicle.imagen_url) {
+      this.existingImages = [vehicle.imagen_url];
+    }
   }
 
   // Cancelar edición
@@ -91,6 +107,34 @@ export class AdminComponent {
     this.editingId = null;
     this.successMessage = '';
     this.errorMessage = '';
+    this.existingImages = [];
+    this.newFiles = [];
+  }
+
+  onFilesSelected(event: any) {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = e => {
+          if (reader.result) {
+            this.newFiles.push({ file, preview: reader.result });
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    // Opcional: limpiar el input para poder seleccionar la misma imagen de nuevo
+    event.target.value = null;
+  }
+
+  removeExistingImage(index: number) {
+    this.existingImages.splice(index, 1);
+  }
+
+  removeNewFile(index: number) {
+    this.newFiles.splice(index, 1);
   }
 
   // Enviar formulario (crear o editar)
@@ -107,13 +151,25 @@ export class AdminComponent {
     }
 
     try {
-      const formValue = { ...this.vehicleForm.value };
-      // Procesar el string de imágenes: separar por coma y limpiar espacios
-      if (formValue.image) {
-        formValue.images = formValue.image.split(',').map((url: string) => url.trim()).filter((url: string) => url !== '');
-      } else {
-        formValue.images = [];
+      // 1. Subir los archivos nuevos
+      const uploadedUrls: string[] = [];
+      if (this.newFiles.length > 0) {
+        for (const newFileObj of this.newFiles) {
+          const { url, error } = await this.vehicleService.uploadImage(newFileObj.file);
+          if (error) {
+            this.errorMessage = 'Hubo un error subiendo la imagen: ' + error;
+            return;
+          }
+          if (url) {
+            uploadedUrls.push(url);
+          }
+        }
       }
+
+      const formValue = { ...this.vehicleForm.value };
+      
+      // 2. Combinar imágenes existentes con las nuevas URL subidas
+      formValue.images = [...this.existingImages, ...uploadedUrls];
 
       if (this.formMode === 'create') {
         await this.createVehicle(user.id, formValue);
