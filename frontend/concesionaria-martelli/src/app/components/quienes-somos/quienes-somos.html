@@ -14,9 +14,10 @@
       <div class="about__image-col">
         <div class="about__image-wrapper about__carousel">
           @for (img of slideImages; track img; let i = $index) {
-            <img [src]="img" alt="Concesionaria Martelli Automotores" class="about__image about__carousel-slide" [class.active]="i === currentSlide" />
+          <img [src]="img" alt="Concesionaria Martelli Automotores" class="about__image about__carousel-slide"
+            [class.active]="i === currentSlide" />
           }
-          
+
           <!-- Navigation Arrows -->
           <button class="about__carousel-arrow about__carousel-arrow--prev" (click)="prevSlide()">
             <i class="fas fa-chevron-left"></i>
@@ -28,7 +29,7 @@
           <!-- Dot Indicators -->
           <div class="about__carousel-dots">
             @for (img of slideImages; track img; let i = $index) {
-              <button class="about__carousel-dot" [class.active]="i === currentSlide" (click)="goToSlide(i)"></button>
+            <button class="about__carousel-dot" [class.active]="i === currentSlide" (click)="goToSlide(i)"></button>
             }
           </div>
         </div>
@@ -53,14 +54,6 @@
           Aceptamos tu vehículo como parte de pago y gestionamos todos los trámites de transferencia
           sin que vos tengas que preocuparte por nada.
         </p>
-
-        <div class="about__actions">
-          <a [href]="getWhatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-primary"
-            id="about-whatsapp-btn">
-            <i class="fab fa-whatsapp"></i>
-            Consultá Ahora
-          </a>
-        </div>
       </div>
     </div>
 
@@ -127,12 +120,6 @@
               <p class="about__info-value">info&#64;martelliautomotores.com</p>
             </div>
           </div>
-
-          <a [href]="getWhatsappUrl()" target="_blank" rel="noopener noreferrer" class="btn-primary about__wa-btn"
-            id="location-whatsapp-btn">
-            <i class="fab fa-whatsapp"></i>
-            Escribinos por WhatsApp
-          </a>
         </div>
       </div>
     </div>

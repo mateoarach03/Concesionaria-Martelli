@@ -45,7 +45,7 @@ export class AdminComponent {
       marca: ['', Validators.required],
       modelo: ['', Validators.required],
       year: ['', [Validators.required, Validators.min(1900), Validators.max(2100)]],
-      precio: ['', [Validators.required, Validators.min(0)]],
+      precio: ['', [Validators.required]],
       descripcion: [''],
       image: [''],
       stock: [1, [Validators.required, Validators.min(0)]],
@@ -75,9 +75,7 @@ export class AdminComponent {
       marca: vehicle.marca,
       modelo: vehicle.modelo,
       year: vehicle.year,
-      precio: typeof vehicle.precio === 'string'
-        ? parseFloat(vehicle.precio.replace(/[^\d.-]/g, ''))
-        : vehicle.precio,
+      precio: vehicle.precio,
       descripcion: vehicle.descripcion || '',
       stock: vehicle.stock || 1,
       km: vehicle.km || '',

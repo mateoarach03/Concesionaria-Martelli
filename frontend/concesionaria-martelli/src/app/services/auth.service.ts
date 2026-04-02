@@ -71,6 +71,32 @@ export class AuthService {
     return this.sessionSubject.value;
   }
 
+  // Solicitar restablecimiento de contraseña
+  async resetPassword(email: string) {
+    try {
+      const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/reset-password',
+      });
+      if (error) throw error;
+      return { error: null };
+    } catch (error: any) {
+      return { error: error?.message || 'Error al solicitar restablecimiento de contraseña' };
+    }
+  }
+
+  // Actualizar contraseña (se llama después de hacer click en el enlace del correo)
+  async updatePassword(newPassword: string) {
+    try {
+      const { data, error } = await this.supabase.auth.updateUser({
+        password: newPassword
+      });
+      if (error) throw error;
+      return { error: null };
+    } catch (error: any) {
+      return { error: error?.message || 'Error al actualizar la contraseña' };
+    }
+  }
+
   // Login con email y password
   async login(email: string, password: string) {
     try {
