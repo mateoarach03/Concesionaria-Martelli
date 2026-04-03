@@ -37,7 +37,7 @@ export class VehiculoDetalleComponent implements OnInit {
 
   public getWhatsappUrl(): string {
     if (!this.vehicle) return '#';
-    const num = '5491100000000'; // Placeholder WhatsApp number
+    const num = '543412718312'; // Placeholder WhatsApp number
     const msg = `Hola, estoy interesado en el ${this.vehicle.marca} ${this.vehicle.modelo} del ${this.vehicle.year}.`;
     return `https://api.whatsapp.com/send?phone=${num}&text=${encodeURIComponent(msg)}`;
   }
