@@ -8,7 +8,7 @@
       <h2 class="section-title">Vehículos <span>Disponibles</span></h2>
       <div class="divider"></div>
       <p class="section-subtitle">
-        Todos nuestros vehículos pasan por un riguroso control de calidad. 
+        Todos nuestros vehículos pasan por un riguroso control de calidad.
         Compra con garantía y confianza.
       </p>
     </div>
@@ -16,12 +16,12 @@
     <!-- Stats Bar -->
     <div class="vehiculos__stats">
       <div class="vehiculos__stat">
-        <span class="vehiculos__stat-num">+200</span>
+        <span class="vehiculos__stat-num">+1000</span>
         <span class="vehiculos__stat-label">Autos Vendidos</span>
       </div>
       <div class="vehiculos__stat-divider"></div>
       <div class="vehiculos__stat">
-        <span class="vehiculos__stat-num">+18</span>
+        <span class="vehiculos__stat-num">+20</span>
         <span class="vehiculos__stat-label">Años de Experiencia</span>
       </div>
       <div class="vehiculos__stat-divider"></div>
@@ -39,7 +39,8 @@
           <label class="vehiculos__filter-label">Buscar</label>
           <div class="vehiculos__input-wrapper">
             <i class="fas fa-search vehiculos__input-icon"></i>
-            <input type="text" [(ngModel)]="searchText" placeholder="Ej: Corolla, Nafta, 2022" class="vehiculos__input" />
+            <input type="text" [(ngModel)]="searchText" placeholder="Ej: Corolla, Nafta, 2022"
+              class="vehiculos__input" />
           </div>
         </div>
 
@@ -50,7 +51,7 @@
             <select [(ngModel)]="filtroMarca" (change)="onMarcaChange()" class="vehiculos__select">
               <option value="">Todas las marcas</option>
               @for (marca of marcasDisponibles; track marca) {
-                <option [value]="marca">{{ marca }}</option>
+              <option [value]="marca">{{ marca }}</option>
               }
             </select>
             <i class="fas fa-chevron-down vehiculos__select-icon"></i>
@@ -64,7 +65,7 @@
             <select [(ngModel)]="filtroModelo" [disabled]="!filtroMarca" class="vehiculos__select">
               <option value="">Todos los modelos</option>
               @for (modelo of modelosDisponibles; track modelo) {
-                <option [value]="modelo">{{ modelo }}</option>
+              <option [value]="modelo">{{ modelo }}</option>
               }
             </select>
             <i class="fas fa-chevron-down vehiculos__select-icon"></i>
@@ -74,95 +75,95 @@
         <!-- Transmisión Filter -->
         <div class="vehiculos__filter-group">
           <label class="vehiculos__filter-label">Transmisión</label>
-           <div class="vehiculos__select-wrapper">
+          <div class="vehiculos__select-wrapper">
             <select [(ngModel)]="filtroTransmision" class="vehiculos__select">
               <option value="">Cualquiera</option>
               @for (transmision of transmisionesDisponibles; track transmision) {
-                <option [value]="transmision">{{ transmision }}</option>
+              <option [value]="transmision">{{ transmision }}</option>
               }
             </select>
             <i class="fas fa-chevron-down vehiculos__select-icon"></i>
           </div>
         </div>
       </div>
-      
+
       @if (hayFiltrosActivos) {
-        <button class="vehiculos__clear-btn" (click)="limpiarFiltros()">
-          <i class="fas fa-times"></i> Limpiar Filtros
-        </button>
+      <button class="vehiculos__clear-btn" (click)="limpiarFiltros()">
+        <i class="fas fa-times"></i> Limpiar Filtros
+      </button>
       }
     </div>
 
     <!-- Vehicle Grid -->
     <div class="vehiculos__grid">
       @for (auto of vehiculosFiltrados; track auto.id) {
-        <article class="vehicle-card" [class.vehicle-card--featured]="auto.destacado" id="vehicle-{{auto.id}}">
-          @if (auto.destacado) {
-            <div class="vehicle-card__badge">
-              <i class="fas fa-star"></i> Destacado
-            </div>
-          }
+      <article class="vehicle-card" [class.vehicle-card--featured]="auto.destacado" id="vehicle-{{auto.id}}">
+        @if (auto.destacado) {
+        <div class="vehicle-card__badge">
+          <i class="fas fa-star"></i> Destacado
+        </div>
+        }
 
-          <div class="vehicle-card__image-wrapper">
-            <img [src]="auto.image" [alt]="auto.marca + ' ' + auto.modelo" class="vehicle-card__image" loading="lazy" />
-            <div class="vehicle-card__image-overlay">
-              <a [href]="getWhatsappUrl(auto)" target="_blank" rel="noopener noreferrer"
-                 class="vehicle-card__quick-wa" [id]="'vehicle-wa-' + auto.id">
-                <i class="fab fa-whatsapp"></i>
-                Consultar
-              </a>
+        <div class="vehicle-card__image-wrapper">
+          <img [src]="auto.image" [alt]="auto.marca + ' ' + auto.modelo" class="vehicle-card__image" loading="lazy" />
+          <div class="vehicle-card__image-overlay">
+            <a [href]="getWhatsappUrl(auto)" target="_blank" rel="noopener noreferrer" class="vehicle-card__quick-wa"
+              [id]="'vehicle-wa-' + auto.id">
+              <i class="fab fa-whatsapp"></i>
+              Consultar
+            </a>
+          </div>
+        </div>
+
+        <div class="vehicle-card__body">
+          <div class="vehicle-card__header">
+            <div>
+              <p class="vehicle-card__brand">{{ auto.marca }}</p>
+              <h3 class="vehicle-card__model">{{ auto.modelo }}</h3>
             </div>
+            <span class="vehicle-card__year">{{ auto.year }}</span>
           </div>
 
-          <div class="vehicle-card__body">
-            <div class="vehicle-card__header">
-              <div>
-                <p class="vehicle-card__brand">{{ auto.marca }}</p>
-                <h3 class="vehicle-card__model">{{ auto.modelo }}</h3>
-              </div>
-              <span class="vehicle-card__year">{{ auto.year }}</span>
-            </div>
-
-            <div class="vehicle-card__specs">
-              <span class="vehicle-card__spec">
-                <i class="fas fa-tachometer-alt"></i>
-                {{ auto.km }} km
-              </span>
-              <span class="vehicle-card__spec">
-                <i class="fas fa-gas-pump"></i>
-                {{ auto.combustible }}
-              </span>
-              <span class="vehicle-card__spec">
-                <i class="fas fa-cog"></i>
-                {{ auto.transmision }}
-              </span>
-            </div>
-
-            <div class="vehicle-card__footer">
-              <div class="vehicle-card__price-group">
-                <span class="vehicle-card__price-label">Precio</span>
-                <span class="vehicle-card__price">{{ auto.precio }}</span>
-              </div>
-              <a [routerLink]="['/vehiculos', auto.id]" 
-                 class="vehicle-card__btn" [id]="'vehicle-detail-' + auto.id">
-                Ver Detalle
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
+          <div class="vehicle-card__specs">
+            <span class="vehicle-card__spec">
+              <i class="fas fa-tachometer-alt"></i>
+              {{ auto.km }} km
+            </span>
+            <span class="vehicle-card__spec">
+              <i class="fas fa-gas-pump"></i>
+              {{ auto.combustible }}
+            </span>
+            <span class="vehicle-card__spec">
+              <i class="fas fa-cog"></i>
+              {{ auto.transmision }}
+            </span>
           </div>
-        </article>
+
+          <div class="vehicle-card__footer">
+            <div class="vehicle-card__price-group">
+              <span class="vehicle-card__price-label">Precio</span>
+              <span class="vehicle-card__price">{{ auto.precio }}</span>
+            </div>
+            <a [routerLink]="['/vehiculos', auto.id]" class="vehicle-card__btn" [id]="'vehicle-detail-' + auto.id">
+              Ver Detalle
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </article>
       }
     </div>
-    
+
     @if (vehiculosFiltrados.length === 0) {
-      <div class="vehiculos__empty">
-        <div class="vehiculos__empty-icon">
-          <i class="fas fa-car-crash"></i>
-        </div>
-        <h3 class="vehiculos__empty-title">Sin resultados</h3>
-        <p class="vehiculos__empty-text">No encontramos vehículos que coincidan con tu búsqueda. Intentá cambiar los filtros.</p>
-        <button class="btn-primary" (click)="limpiarFiltros()">Ver todos los vehículos</button>
+    <div class="vehiculos__empty">
+      <div class="vehiculos__empty-icon">
+        <i class="fas fa-car-crash"></i>
       </div>
+      <h3 class="vehiculos__empty-title">Sin resultados</h3>
+      <p class="vehiculos__empty-text">No encontramos vehículos que coincidan con tu búsqueda. Intentá cambiar los
+        filtros.</p>
+      <button class="btn-primary" (click)="limpiarFiltros()">Ver todos los vehículos</button>
+    </div>
     }
 
   </div>
